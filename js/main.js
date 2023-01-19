@@ -14,6 +14,7 @@ function calculo (conocimiento, habilidad, actitud, valor){
     valor = ((conocimiento + habilidad) * actitud) /2
     console.log(`El VALOR de ${nombrePersona} es ${valor}`)
 
+
     //ciclo IF dentro de funcion.
     if(valor < 69){
         console.log(`${nombrePersona} debe seguir creciendo`)
@@ -23,8 +24,11 @@ function calculo (conocimiento, habilidad, actitud, valor){
         console.log(`${nombrePersona} es una persona con mucho valor`)
     } else if(valor == 100){
         console.log(`${nombrePersona} es una persona increiblemente valorada!`)
-    }
+    } else if(valor > 100){
+        console.log(`ERROR, usted ingreso algun valor mayores a 10. Vuelva a ingresar valores correctos`)
+    } 
 }
+
 
 
 
@@ -39,8 +43,16 @@ for(let i = 1; i <=cantidadPersonas; i++ ){
     habilidad = parseInt(prompt(`del 1 al 10, ingrese la HABILIDAD de ${nombrePersona}`))
     actitud = parseInt(prompt(`del 1 al 10, ingrese la ACTITUD de ${nombrePersona}`))
     
-    calculo (conocimiento, habilidad, actitud, valor)
+    const persona = {
+        nombre: nombrePersona,
+        conocimientoper: conocimiento,
+        habilidadper: habilidad,
+        actitudper: actitud
+    }
 
+    calculo (conocimiento, habilidad, actitud, valor)
+    
+    console.log(persona)
 }
 
 
