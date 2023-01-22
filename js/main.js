@@ -1,59 +1,150 @@
 
 //variables
-let nombrePersona
-let conocimiento
-let habilidad
+let nombreJugador 
+let ataque 
+let defensa 
 let actitud
 let valor 
-let cantidadPersonas
+let cantidadJugador 
 
 
 
-//FUNCION
-function calculo (conocimiento, habilidad, actitud, valor){
-    valor = ((conocimiento + habilidad) * actitud) /2
-    console.log(`El VALOR de ${nombrePersona} es ${valor}`)
+//class constructora
+class jugador {
+    constructor(id, nombre, ataquejugador, defensajugador, actitudjugador, valorjugador)
+    {
+    //propiedades/atributos
+    this.id = id,
+    this.nombre = nombre,
+    this.ataquejugador = ataquejugador,
+    this.defensajugador = defensajugador,
+    this.actitudjugador = actitudjugador,
+    this.valorjugador = valorjugador 
+    }
+        
+    //métodos
+    mostrarInfojugador(){
+    console.log(`Nombre ${this.nombre} - ATAQUE ${this.ataquejugador} - DEFENSA ${this.defensajugador} - ACTITUD ${this.actitudjugador}`)
+    }
+   
+}
 
 
-    //ciclo IF dentro de funcion.
+
+//Instanciación de objetos
+const jugador1 = new jugador(1,"Z",10, 10, 10, 10)
+const jugador2 = new jugador(2,"Y",10, 10, 10, 10)
+const jugador3 = new jugador(3,"X",10, 10, 10, 10)
+
+
+
+//guardar array players 
+const players = [jugador1, jugador2, jugador3]
+console.log(players)
+
+
+
+//gardar array equipos
+const equipos = []
+console.log(equipos)
+equipos.push(jugador1, jugador2, jugador3)
+console.log(equipos)
+
+
+
+//ciclo for of
+// for(const elem of players){
+//     console.log(elem)
+//     console.log(elem.id, elem.nombre)
+// }
+
+
+
+//FUNCTIONS agregar jugadores:
+function agregarjugador(){
+    nombreJugador = prompt("Ingrese el NOMBRE del Jugador a valorar")
+    ataque = parseInt(prompt(`del 1 al 10, ingrese el ATAQUE de  ${nombreJugador}`))
+    defensa = parseInt(prompt(`del 1 al 10, ingrese la DEFENSA de ${nombreJugador}`))
+    actitud = parseInt(prompt(`del 1 al 10, ingrese la ACTITUD de ${nombreJugador}`))
+
+    calculo (ataque, defensa, actitud, valor)
+  
+    //nuevo objeto 
+    const jugadorNuevo = new jugador(players.length+1, nombreJugador, ataque, defensa, actitud, valor)
+    console.log(jugadorNuevo)
+    
+    //sumarlo a players
+    players.push(jugadorNuevo) 
+    jugadorNuevo.mostrarInfojugador()
+    console.log(players)
+}
+
+
+
+
+
+// -->>>  No me carga ni me muestra VALOR, que es el numero que se calcula con la formula, dentro del objeto.
+// //FUNCION para el calculo      
+function calculo (ataque, defensa, actitud, valor){
+    valor = ((ataque + defensa) * actitud) /2
+
+    console.log(`✮ El VALOR de ${nombreJugador} es ${valor} ✮`)
+
+    //ciclo IF dentro de metodo.
     if(valor < 69){
-        console.log(`${nombrePersona} debe seguir creciendo`)
+        console.log(`➤ ${nombreJugador} debe seguir creciendo`)
     } else if(valor >= 70 && valor <= 89){
-        console.log(`${nombrePersona} es una persona con aptitudes`)
+        console.log(`➤ ${nombreJugador} es un Jugador con aptitudes`)
     } else if(valor >= 90 && valor <= 99){
-        console.log(`${nombrePersona} es una persona con mucho valor`)
+        console.log(`➤ ${nombreJugador} es un Jugador con mucho valor`)
     } else if(valor == 100){
-        console.log(`${nombrePersona} es una persona increiblemente valorada!`)
+        console.log(`➤ ${nombreJugador} es un Jugador increiblemente valorada!`)
     } else if(valor > 100){
-        console.log(`ERROR, usted ingreso algun valor mayores a 10. Vuelva a ingresar valores correctos`)
+        console.log(`✘ERROR✘, usted ingreso algun valor mayores a 10. Vuelva a ingresar valores correctos`)
     } 
 }
 
 
 
+function menu(){
+    let salirMenu = false
+    do{
+        salirMenu = preguntarOpcion(salirMenu)
+    }while(!salirMenu)
+} 
 
-//pedir cantidad de personas a valorar
-cantidadPersonas = parseInt(prompt(`Ingrese la cantidad de personas a valorar`))
 
 
-//Codigo
-for(let i = 1; i <=cantidadPersonas; i++ ){
-    nombrePersona = prompt("Ingrese el NOMBRE de la persona a valorar")
-    conocimiento = parseInt(prompt(`del 1 al 10, ingrese el CONOCIMIENTO de  ${nombrePersona}`))
-    habilidad = parseInt(prompt(`del 1 al 10, ingrese la HABILIDAD de ${nombrePersona}`))
-    actitud = parseInt(prompt(`del 1 al 10, ingrese la ACTITUD de ${nombrePersona}`))
+function preguntarOpcion(salir){
+    let opcionIngresada = parseInt(prompt(`Ingrese la opción deseada
+           1 - Agregar jugador
+           2 - Borrar jugador
+           3 - Consultar         
+           0 - Salir del menu`))
     
-    const persona = {
-        nombre: nombrePersona,
-        conocimientoper: conocimiento,
-        habilidadper: habilidad,
-        actitudper: actitud
-    }
-
-    calculo (conocimiento, habilidad, actitud, valor)
-    
-    console.log(persona)
+        switch(opcionIngresada){
+            case 1:
+                agregarjugador()
+            break
+            case 2:
+                console.log("Borrar libro")
+            break
+            case 3:
+                console.log("Ver catalogo")
+            break
+            case 0:
+                console.log("Te esperamos pronto")
+                salir = true
+                return salir
+            break
+            default:
+                console.log("Ingrese una opción correcta")
+            break
+        }
 }
+
+
+menu()
 
 
 
@@ -72,33 +163,3 @@ for(let i = 1; i <=cantidadPersonas; i++ ){
 //-------------------------------------------------PRACTICA CLASES-----------------------------------------------------------
 // selecciono + control K y C = comento
 // selecciono + control K y U = descomento
-
-
-// function participante(nombre, edad, roll, ciudad){
-//    //ATRIBUTOS
-//     this.nombre = nombreI,
-//     this.edad = edadI,
-//     this.roll = rollI,
-//     this.ciudad = coudadI
-//     //METODO:
-//     this.mostrarinfo = function(){
-//         console.log(`la persona ${this.nombre} con el roll ${this.roll} vive en ${this.ciudad}`)
-//     }
-// }
-
-// const participante1 = new participante("damian", 30, "jefe", "glew")
-
-
-// //tercera forma crear objeto - mediante clase
-// class auto{
-//     constructor(modelo, marca, precio){
-//         this.modelo = modelo,
-//         this.marca = marca,
-//         this.precico = precio
-//     }
-
-// }
-
-// //instanciar el objeto de la class
-// const fitito = new auto("600", "fiat", 50000)
-// console.log(fitito)
